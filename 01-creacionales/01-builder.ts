@@ -12,3 +12,69 @@
  *
  * https://refactoring.guru/es/design-patterns/builder
  */
+
+class Computer {
+    public cpu!: string;
+    public ram!: string;
+    public storage!: string;
+    public gpu!: string;
+
+    displayConfiguration(){
+        console.log(`CPU: ${this.cpu}, RAM: ${this.ram}, Storage: ${this.storage}, GPU: ${this.gpu}`);
+    }   
+}
+
+// Builder
+
+class ComputerBuilder {
+    private computer: Computer;
+
+    constructor() {
+        this.computer = new Computer();
+    }   
+
+    setCPU(cpu: string): ComputerBuilder {
+        this.computer.cpu = cpu;
+        return this;
+    }
+
+    setRAM(ram: string): ComputerBuilder {
+        this.computer.ram = ram;
+        return this;
+    }
+
+    setStorage(storage: string): ComputerBuilder {
+        this.computer.storage = storage;
+        return this;
+    }
+
+    setGPU(gpu: string): ComputerBuilder {
+        this.computer.gpu = gpu;
+        return this;
+    }
+
+    build(): Computer {
+        return this.computer;
+    }
+}
+
+function main() {
+    const gamingComputer = new ComputerBuilder()
+        .setCPU('Intel Core i9')
+        .setRAM('32GB')
+        .setStorage('1TB SSD')
+        .setGPU('NVIDIA RTX 3080')
+        .build();
+
+    const officeComputer = new ComputerBuilder()
+        .setCPU('Intel Core i5')
+        .setRAM('16GB')
+        .setStorage('512GB SSD')
+        .setGPU('Integrated Graphics')
+        .build();
+
+    console.log(gamingComputer.displayConfiguration())
+    console.log(officeComputer.displayConfiguration())   
+}
+
+main();
