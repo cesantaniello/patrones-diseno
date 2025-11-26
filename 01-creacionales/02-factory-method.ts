@@ -36,7 +36,7 @@ class BeanBurger implements Hamburger {
 }
 
 abstract class BurgerFactory {
-    abstract createBurger(): Hamburger;
+    protected abstract createBurger(): Hamburger;
 
     orderBurger(): void {
         const burger = this.createBurger();
