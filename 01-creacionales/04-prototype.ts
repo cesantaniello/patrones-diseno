@@ -9,3 +9,38 @@
  * 
  * https://refactoring.guru/es/design-patterns/prototype
  */
+
+class Document {
+    
+    public title: string;
+    private content: string;
+    public author: string
+    
+    constructor(title: string, content: string, author: string) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+    }
+
+    clone(): Document {
+        return new Document(this.title, this.content, this.author);
+    }
+    
+    displayInfo(){
+        console.log(`Title: ${this.title}, Content: ${this.content}, Author: ${this.author}`);
+    }
+}
+
+function main() {
+    const originalDoc = new Document("Design Patterns", "Content about design patterns.", "John Doe");
+    console.log(originalDoc);
+    originalDoc.displayInfo();
+
+    const clonedDoc = originalDoc.clone();
+    clonedDoc.title = "Prototype Pattern";
+    clonedDoc.author = "Jane Smith";
+    console.log(clonedDoc);
+    clonedDoc.displayInfo();
+}
+
+main();
