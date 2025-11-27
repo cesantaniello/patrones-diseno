@@ -17,3 +17,62 @@
  *  (en este caso, hamburguesas y bebidas) sin especificar las clases concretas
  *  de cada uno de esos objetos en el código principal.
  */
+
+interface Burger {
+    prepare(): void;
+}
+
+interface Drink {
+    serve(): void;
+}
+
+class VeggieBurger implements Burger {
+    prepare(): void {
+        console.log("Preparing a veggie burger.");
+    }
+}
+
+class ChickenBurger implements Burger {
+    prepare(): void {
+        console.log("Preparing a chicken burger.");
+    }
+}
+
+class Soda implements Drink {
+    serve(): void {
+        console.log("Serving a soda.");
+    }  
+}
+
+class Juice implements Drink {
+    serve(): void {
+        console.log("Serving a juice.");
+    }
+}
+
+interface FastFoodFactory {
+    createBurger(): Burger;
+    createDrink(): Drink;
+}
+
+class VeggieFastFoodFactory implements FastFoodFactory {
+    
+    createBurger(): Burger {
+        return new VeggieBurger();
+    }
+
+    createDrink(): Drink {
+        return new Juice();
+    }
+}
+
+class ChickenFastFoodFactory implements FastFoodFactory {
+
+    createBurger(): Burger {
+        return new ChickenBurger();
+    }
+    
+    createDrink(): Drink {
+        return new Soda();
+    }
+}
