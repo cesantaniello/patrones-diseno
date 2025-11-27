@@ -71,8 +71,22 @@ class ChickenFastFoodFactory implements FastFoodFactory {
     createBurger(): Burger {
         return new ChickenBurger();
     }
-    
+
     createDrink(): Drink {
         return new Soda();
     }
 }
+
+function main(factory: FastFoodFactory) {
+    const burger = factory.createBurger();
+    const drink = factory.createDrink();
+
+    burger.prepare();
+    drink.serve();
+}
+
+console.log("Veggie Fast Food Order:");
+main(new VeggieFastFoodFactory());
+
+console.log("\nChicken Fast Food Order:");
+main(new ChickenFastFoodFactory());
