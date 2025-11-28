@@ -46,6 +46,14 @@ class CodeEditorHistory {
         this.currentStateIndex++;
     }
 
+    undo(): CodeEditorState | null {
+        if (this.currentStateIndex > 0) {
+            this.currentStateIndex--;
+            return this.states[this.currentStateIndex];
+        }
+        return null;
+    }
+
     redo(): CodeEditorState | null {
         if (this.currentStateIndex > 0) {
             this.currentStateIndex--;
@@ -55,3 +63,31 @@ class CodeEditorHistory {
     }
 }
 
+function main() {
+    const history = new CodeEditorHistory();
+    let currentState = new CodeEditorState("console.log: Initial content", 2, false);
+
+    history.saveState(currentState);
+    console.log("first");
+
+    currentState = currentState.copyWith({content: "console.log: Modified content", unsavedChanges: true});
+
+    console.log("After first change: ")
+    currentState.displayState();
+
+    console.log("After cursor move: ")
+    currentState = currentState.copyWith({cursorPosition: 5});
+    currentState.displayState();
+
+    history.saveState(currentState);
+    
+    console.log("After second change: ")
+    const previousState = history.undo();
+    currentState.displayState();
+
+    console.log("After redo: ");
+    const redoState = history.redo();
+    redoState?.displayState();
+}
+
+main();
