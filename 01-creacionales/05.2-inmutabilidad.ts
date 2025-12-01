@@ -17,6 +17,12 @@
 
 import { COLORS } from '../helpers/colors.ts';
 
+interface PlayerProps {
+  name: string;
+  score: number;
+  level: number;
+}
+
 // 1. Clase Player inmutable
 class Player {
   readonly name: string;
@@ -24,12 +30,18 @@ class Player {
   readonly level: number;
 
   constructor(name: string, score: number, level: number) {
-    throw new Error('Method not implemented.');
+    this.name = name;
+    this.score = score;
+    this.level = level;
   }
 
   // Método copyWith para crear una copia modificada del jugador
   copyWith({ name, score, level }: Partial<Player>): Player {
-    throw new Error('Method not implemented.');
+    return new Player(
+      name ?? this.name,
+      score ?? this.score,
+      level ?? this.level
+    );
   }
 
   displayState(): void {
