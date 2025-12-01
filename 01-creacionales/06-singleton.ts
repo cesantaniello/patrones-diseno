@@ -44,3 +44,12 @@ class DragonBall {
         console.log(`You need ${3 - this.wishes} more wishes to summon Shenron.`);
     }
 }
+
+function main(){
+    const dragonBall1 = DragonBall.getInstance();
+    dragonBall1.collectWishes();
+    dragonBall1.collectWishes();
+    dragonBall1.summonShenron();
+}
+
+main();
