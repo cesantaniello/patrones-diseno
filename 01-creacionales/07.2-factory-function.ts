@@ -33,7 +33,24 @@ type LogLevel = 'info' | 'warn' | 'error';
 function createLogger(level: LogLevel) {
   // Retorna una función que recibe el "message" como argumento
   // Completar: implementar el logger con formato y color para cada nivel
-  throw new Error('Not implemented');
+  return function logMessage(message: string) {
+    const timestamp = formatDate(new Date());
+    let coloredMessage: string;
+    switch (level) {
+      case 'info':
+        coloredMessage = `[INFO:${timestamp}] ${message}`;
+        break;
+      case 'warn':
+        coloredMessage = `[WARNING:${timestamp}] ${message}`;
+        break;
+      case 'error':
+        coloredMessage = `[ERROR:${timestamp}] ${message}`;
+        break;
+      default:
+        coloredMessage = `[LOG:${timestamp}] ${message}`;
+    }
+    console.log(coloredMessage);
+  }
 }
 
 // Ejemplo de uso
