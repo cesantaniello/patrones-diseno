@@ -24,6 +24,12 @@ function greeterFactory(language: Language) {
     }
 }
 
-// Ejemplo de uso
-const englishGreeter = greeterFactory('en');
-console.log(englishGreeter('Alice')); // Output: Hello, Alice
+function main() {
+    const englishGreeter = greeterFactory('en');
+    const spanishGreeter = greeterFactory('es');
+
+    console.log(englishGreeter('Alice'));
+    console.log(spanishGreeter('Carlos'));
+}
+
+main();
