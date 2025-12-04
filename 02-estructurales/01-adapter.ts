@@ -11,9 +11,12 @@
  * https://refactoring.guru/es/design-patterns/adapter
  */
 
-import { LocalLogger } from './adapter-files/local-logger.ts';
+import { LoggerAdapter } from "./adapter-files/logger-adapter.ts";
 
-const logger = new LocalLogger('/var/logs/app.log');
+//import { LocalLogger } from './adapter-files/local-logger.ts';
+
+
+const logger = new LoggerAdapter('/var/logs/app.log');
 
 logger.writeLog('Este es un mensaje de log');
 logger.writeError('Este es un mensaje de error');
