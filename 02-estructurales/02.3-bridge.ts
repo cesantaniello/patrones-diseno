@@ -9,3 +9,59 @@
  *
  * https://refactoring.guru/es/design-patterns/bridge
  */
+
+interface NotificationChannel {
+  send(message: string): void;
+}
+
+class EmailChannel implements NotificationChannel {
+  send(message: string): void {
+    console.log(`Enviando correo electrónico: ${message}`);
+  }
+}
+
+class SMSChannel implements NotificationChannel {
+  send(message: string): void {
+    console.log(`Enviando SMS: ${message}`);
+  }
+}
+
+class PushNotificationChannel implements NotificationChannel {
+  send(message: string): void {
+    console.log(`Enviando Push: ${message}`);
+  }
+}
+
+abstract class Notification {
+  protected channels: NotificationChannel[];
+  constructor(channels: NotificationChannel[]) {
+    this.channels = channels;
+  }
+  abstract notify(message: string): void;
+  abstract addChannel(channel: NotificationChannel): void;
+}
+
+class AlertNotification extends Notification {
+    override notify(message: string): void {
+        console.log('\nNotificación de Alerta:');
+        this.channels.forEach(channel => channel.send(message));
+    }
+
+    override addChannel(channel: NotificationChannel): void {
+        this.channels.push(channel);
+    }
+}
+
+function main() {
+
+    const channels = [
+        new EmailChannel(),
+        new SMSChannel(),
+        new PushNotificationChannel()
+    ]
+
+    const alertNotification = new AlertNotification(channels);
+    alertNotification.notify('¡Esta es una alerta importante!');
+}
+
+main();
