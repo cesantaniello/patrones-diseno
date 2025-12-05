@@ -25,6 +25,12 @@ class IceAbility implements Ability {
     }
 }
 
+class AxeAttack implements Ability {
+    useAbility(): void {
+        console.log('Attacking with an axe!');
+    }
+}
+
 abstract class Character {
     protected ability: Ability;
 
@@ -52,3 +58,16 @@ class Mage extends Character {
         this.ability.useAbility();
     }
 }
+
+function main() {
+    const warrior = new Warrior(new FireAbility());
+    warrior.performAbility();
+
+    warrior.setAbility(new AxeAttack());
+    warrior.performAbility();
+
+    const mage = new Mage(new IceAbility());
+    mage.performAbility();
+}
+
+main();
