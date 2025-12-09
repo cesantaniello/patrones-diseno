@@ -40,6 +40,10 @@ class Folder implements FileSystemComponent {
         this.name = name;
     }
 
+    add(component: FileSystemComponent): void {
+        this.contents.push(component);
+    }
+
     showDetails(indent: string): void {
     console.log(`${indent}+ Folder: ${this.name}`);
         this.contents.forEach(component => {
@@ -47,3 +51,22 @@ class Folder implements FileSystemComponent {
         });
     }
 }
+
+function main() {
+    const folderA = new Folder("FolderA");
+    const file1 = new File("File1.txt");
+    const file2 = new File("File2.txt");
+    const file3 = new File("File3.txt");
+
+    folderA.add(file1);
+    folderA.add(file2);
+
+    const folderB = new Folder("FolderB");
+    folderB.add(file3);
+
+    folderA.add(folderB);
+
+    folderA.showDetails("");
+}
+
+main();
