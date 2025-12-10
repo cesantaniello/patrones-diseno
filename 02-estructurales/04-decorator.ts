@@ -57,3 +57,12 @@ class SMSDecorator extends NotificadorDecorador {
         this.enviarSMS(mensaje);
     }
 }
+
+function main() {
+    let notificador: Notificador = new NotificadorBase();
+    notificador = new EmailDecorator(notificador);
+    notificador = new SMSDecorator(notificador);
+    notificador.enviar("Hola usuario!");
+}
+
+main();
