@@ -101,3 +101,23 @@ class HomeTheaterFacade {
     }
 
 }
+
+function main() {
+    const projector = new Projector();
+    const soundSystem = new SoundSystem();
+    const videoPlayer = new VideoPlayer();
+    const popcornMaker = new PopcornMaker();
+
+    const homeTheater = new HomeTheaterFacade({
+        projector,
+        soundSystem,
+        videoPlayer,
+        popcornMaker
+    });
+
+    homeTheater.watchMovie("Inception");
+    console.log("\n--- Película en progreso ---\n");
+    homeTheater.endMovie();
+}
+
+main();
