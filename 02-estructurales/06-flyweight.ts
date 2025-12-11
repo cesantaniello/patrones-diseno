@@ -39,3 +39,30 @@ class LocationFactory {
         return this.icons[key];
     }
 }
+
+class MapLocation {
+    private icon: LocationIcon;
+    private coordinates: {x: number, y: number};
+
+    constructor(icon: LocationIcon, coordinates: {x: number, y: number}) {
+        this.icon = icon;
+        this.coordinates = coordinates;
+    }
+
+    display(): void {
+        this.icon.display(this.coordinates);
+    }
+}
+
+function main() {
+    const factory = new LocationFactory();
+
+    const locations: MapLocation[] = [
+        new MapLocation(factory.getLocationIcon('restaurant', 'restaurant.png'), {x: 10, y: 20}),
+        new MapLocation(factory.getLocationIcon('restaurant', 'restaurant.png'), {x: 15, y: 25}),
+    ];
+
+    locations.forEach(location => location.display());
+}
+
+main();
