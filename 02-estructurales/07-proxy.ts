@@ -54,3 +54,19 @@ class MagicPortal implements Room {
     }
 
 }
+
+function main() {
+
+    const portal = new MagicPortal(new SecretRoom());
+
+    const player1 = new Player('Hero', 5);
+    const player2 = new Player('Warrior', 15);
+
+    console.log('-- Player 1 tries to enter the secret room --');
+    portal.enter(player1);
+
+    console.log('-- Player 2 tries to enter the secret room --');
+    portal.enter(player2);
+}
+
+main();
