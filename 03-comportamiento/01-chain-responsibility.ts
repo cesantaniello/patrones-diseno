@@ -64,3 +64,18 @@ class ExpertSupport extends BaseHandler {
         super.handle(request);
     }
 }
+
+function main() {
+    const basicSupport = new BasicSupport();
+    const advancedSupport = new AdvancedSupport();
+    const expertSupport = new ExpertSupport();
+
+    basicSupport.setNext(advancedSupport).setNext(expertSupport);
+
+    basicSupport.handle('basic');
+    basicSupport.handle('advanced');
+    basicSupport.handle('expert');
+    basicSupport.handle('unknown');
+}
+
+main();
