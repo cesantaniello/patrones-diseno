@@ -88,3 +88,33 @@ class RemoteControl {
     }
 }
 
+function main() {
+
+    const light = new Light();
+    const fan = new Fan();
+    const remote = new RemoteControl();
+
+    const lightOn = new LightOnCommand(light);
+    const lightOff = new LightOffCommand(light);
+    const fanOn = new FanOnCommand(fan);
+    const fanOff = new FanOffCommand(fan);
+
+    remote.setCommand("lightOn", lightOn);
+    remote.setCommand("lightOff", lightOff);
+    remote.setCommand("fanOn", fanOn);
+    remote.setCommand("fanOff", fanOff);
+
+    let continueProgram = true;
+
+    do {
+        console.log("\n--- Control Remoto ---");
+        const button = prompt("Presiona un botón (lightOn, lightOff, fanOn, fanOff) o 'exit' para salir:")
+        if (button === 'exit') {
+            continueProgram = false;
+        } else {
+            remote.pressButton(button || "");
+        }
+    } while (continueProgram);
+}
+
+main();
