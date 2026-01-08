@@ -36,6 +36,8 @@ class User {
     constructor(username: string, chatRoom: ChatRoom) {
         this.username = username;
         this.chatRoom = chatRoom;
+
+        chatRoom.addUser(this);
     }
 
     sendMessage(message: string): void {
@@ -47,3 +49,17 @@ class User {
         console.log(`${this.username} recibe: ${message}`);
     }
 }
+
+function main() {
+    const chatRoom = new ChatRoom('Sala de Chat');
+
+    const user1 = new User('Alice', chatRoom);
+    const user2 = new User('Bob', chatRoom);
+    const user3 = new User('Charlie', chatRoom);
+
+    user1.sendMessage('Hola a todos!');
+    user2.sendMessage('¡Hola Alice!');
+    user3.sendMessage('¡Hola Alice y Bob!');
+}
+
+main();
