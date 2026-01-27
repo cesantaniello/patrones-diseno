@@ -37,15 +37,11 @@ class GameMemento {
 }
 
 class Game {
-    private level: number;
-    private health: number;
-    private position: string;
+    private level: number = 1;
+    private health: number = 100;
+    private position: string = '0,0';
 
-    constructor(level: number, health: number, position: string) {
-        this.level = level;
-        this.health = health;
-        this.position = position;
-        
+    constructor() {
         console.log(`
             Jugador en nivel ${this.level} con salud ${this.health} y posición ${this.position}
         `);
@@ -85,3 +81,24 @@ class GameHistory {
         return this.mementos.pop();
     }
 }
+
+function main() {
+    const game = new Game();
+    const history = new GameHistory();
+
+    history.push(game.save());
+
+    game.play(2, 80, '10,10');
+    history.push(game.save());
+
+    game.play(3, 50, '20,20');
+    history.push(game.save());
+
+    game.play(4, 60, '30,30');
+    console.log('Estado actual');
+
+    game.restore(history.pop()!);
+    console.log('Estado guardado 1');
+}
+
+main();
