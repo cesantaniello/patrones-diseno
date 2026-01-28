@@ -57,3 +57,23 @@ class Subscriber implements Observer {
         console.log(`Hola ${this.name}, se ha subido un nuevo video: ${videoTitle}`);
     }
 }
+
+function main() {
+    const channel = new YouTubeChannel("Tech Academy");
+
+    const subscriber1 = new Subscriber("Alice");
+    const subscriber2 = new Subscriber("Bob");
+
+    channel.subscribe(subscriber1);
+    
+    channel.uploadVideo("Introducción a TypeScript");
+    
+    channel.subscribe(subscriber2);
+    channel.uploadVideo("Patrón Observer en TypeScript");
+
+    channel.unsubscribe(subscriber1);
+    channel.uploadVideo("Programación Orientada a Objetos");
+
+}
+
+main();
