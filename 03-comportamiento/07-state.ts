@@ -32,7 +32,7 @@ class VendingMachine {
     private state: State;
 
     constructor() {
-        
+        this.state = new WaitingForMoneyState(this);
     }
 
     insertMoney(amount: number): void {
@@ -50,11 +50,15 @@ class VendingMachine {
     getStateName(): string {
         return this.state.name;
     }
+
+    setState(state: State): void {
+        this.state = state;
+    }
 }
 
 class WaitingForMoneyState implements State {
     
-    private name: string = "WaitingForMoney";
+    public name: string = "Waiting For Money";
     private vendingMachine: VendingMachine;
 
     constructor(vendingMachine: VendingMachine) {
@@ -65,9 +69,8 @@ class WaitingForMoneyState implements State {
         console.log('Now you can choose a product')
         throw new Error("Method not implemented.");
 
-        //this.vendingMachine.setState();
+        this.vendingMachine.setState(new ProductSelected(this.vendingMachine));
     }
-
 
     selectProduct(): void {
         console.log('You must introduce money');
@@ -76,5 +79,54 @@ class WaitingForMoneyState implements State {
     dispenseProduct(): void {
         console.log('You must introduce money');
     }
+
+}
+
+class ProductSelected implements State {
+    
+    public name: string = "Product Selected";
+    private vendingMachine: VendingMachine;
+
+    constructor(vendingMachine: VendingMachine) {
+        this.vendingMachine = vendingMachine;
+    }
+
+    insertMoney(): void {
+        console.log('Now you can choose a product')
+    }
+
+    selectProduct(): void {
+        this.vendingMachine.setState(new DispensingProduct(this.vendingMachine));
+    }
+
+    dispenseProduct(): void {
+        console.log('You must introduce money');
+    }
+
+}
+
+class DispensingProduct implements State {
+    
+    public name: string = "Dispensing Product";
+    private vendingMachine: VendingMachine;
+
+    constructor(vendingMachine: VendingMachine) {
+        this.vendingMachine = vendingMachine;
+    }
+
+    insertMoney(): void {
+        console.log('Please wait, we are already giving you a product');
+    }
+
+    selectProduct(): void {
+        console.log('Your product is being dispensed');
+
+    }
+
+    dispenseProduct(): void {
+        console.log('Product dispensed. Thank you!');
+        this.vendingMachine.setState(new WaitingForMoneyState(this.vendingMachine));
+    }
+
 
 }
