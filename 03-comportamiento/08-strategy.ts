@@ -54,5 +54,19 @@ class Patito {
     mover(): void {
         this.estrategiaMovimiento.mover();
     }
-
 }
+
+function carreraDePatitos() {
+    const patito1 = new Patito(new Nadar());
+    const patito2 = new Patito(new Volar());
+    const patito3 = new Patito(new Caminar());
+
+    patito1.mover(); // El patito está nadando.
+    patito2.mover(); // El patito está volando.
+    patito3.mover(); // El patito está caminando.
+
+    patito3.setEstrategiaMovimiento(new Nadar());
+    patito3.mover(); // El patito está nadando.
+}
+
+carreraDePatitos();
