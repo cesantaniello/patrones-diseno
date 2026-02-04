@@ -17,3 +17,42 @@
  * ! patitos compiten en una carrera y cada uno tiene su propia
  * ! estrategia de movimiento (por ejemplo, nadar, volar o caminar).
  */
+
+interface EstrategiaMovimiento {
+    mover(): void;
+}
+
+class Nadar implements EstrategiaMovimiento {
+    mover(): void {
+        console.log("El patito está nadando.");
+    }
+}
+
+class Volar implements EstrategiaMovimiento {
+    mover(): void {
+        console.log("El patito está volando.");
+    }
+}
+
+class Caminar implements EstrategiaMovimiento {
+    mover(): void {
+        console.log("El patito está caminando.");
+    }
+}
+
+class Patito {
+    private estrategiaMovimiento: EstrategiaMovimiento;
+
+    constructor(estrategiaMovimiento: EstrategiaMovimiento) {
+        this.estrategiaMovimiento = estrategiaMovimiento;
+    }
+
+    setEstrategiaMovimiento(estrategiaMovimiento: EstrategiaMovimiento): void {
+        this.estrategiaMovimiento = estrategiaMovimiento;
+    }
+
+    mover(): void {
+        this.estrategiaMovimiento.mover();
+    }
+
+}
