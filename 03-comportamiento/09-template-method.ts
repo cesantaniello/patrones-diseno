@@ -30,7 +30,10 @@
 abstract class BebidaCaliente {
 
     preparaBebida(): void {
-
+        this.hervirAgua();
+        this.añadirIngredientePrincipal();
+        this.servirEnTaza();
+        this.añadirCondimentos();
     }
 
     private hervirAgua(): void {
@@ -64,3 +67,15 @@ class Te extends BebidaCaliente {
         console.log("Añadiendo limón...");
     }
 }
+
+function main() {
+    const cafe = new Cafe();
+    console.log("Preparando café:");
+    cafe.preparaBebida();
+
+    const te = new Te();
+    console.log("\nPreparando té:");
+    te.preparaBebida();
+}
+
+main();
