@@ -112,3 +112,29 @@ class SeniorVisitor implements Visitor {
         return ferrisWheel.getPrice() * 0.7; // 30% de descuento para adultos mayores
     }
 }
+
+function main() {
+    const rollerCoaster = new RollerCoaster();
+    const hauntedHouse = new HauntedHouse();
+    const ferrisWheel = new FerrisWheel();
+
+    const childVisitor = new ChildVisitor();
+    const adultVisitor = new AdultVisitor();
+    const seniorVisitor = new SeniorVisitor();
+    console.log("Precios para niños:");
+    console.log(`Montaña Rusa: $${rollerCoaster.accept(childVisitor)}`);
+    console.log(`Casa del Terror: $${hauntedHouse.accept(childVisitor)}`);
+    console.log(`Rueda de la Fortuna: $${ferrisWheel.accept(childVisitor)}`);
+
+    console.log("\nPrecios para adultos:");
+    console.log(`Montaña Rusa: $${rollerCoaster.accept(adultVisitor)}`);
+    console.log(`Casa del Terror: $${hauntedHouse.accept(adultVisitor)}`);
+    console.log(`Rueda de la Fortuna: $${ferrisWheel.accept(adultVisitor)}`);
+
+    console.log("\nPrecios para adultos mayores:");
+    console.log(`Montaña Rusa: $${rollerCoaster.accept(seniorVisitor)}`);
+    console.log(`Casa del Terror: $${hauntedHouse.accept(seniorVisitor)}`);
+    console.log(`Rueda de la Fortuna: $${ferrisWheel.accept(seniorVisitor)}`);
+}
+
+main();
